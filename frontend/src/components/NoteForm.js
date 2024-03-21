@@ -21,7 +21,6 @@ const NoteForm = () => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:8080/notes/add", formData);
-      alert("Note created successfully!");
 
       setFormData({
         title: "",
@@ -32,7 +31,6 @@ const NoteForm = () => {
       navigate("/cards");
     } catch (error) {
       console.error("Error creating note:", error);
-      alert("An error occurred while creating the note. Please try again.");
     }
   };
 
