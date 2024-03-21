@@ -20,15 +20,22 @@ exports.getNoteById = async (req, res) => {
 
 exports.createNote = async (req, res) => {
   const { title, content } = req.body;
-  const newNote = new Note({
-    title,
-    content,
-  });
   try {
+    const existingNote = await Note.findOne({ title });
+    if (existingNote) {
+      return res
+        .status(400)
+        .json({ message: "Note with this title already exists." });
+    }
+
+    const newNote = new Note({
+      title,
+      content,
+    });
     await newNote.save();
-    res.json("Note added!");
+    res.status(201).json({ message: "Note added!", note: newNote });
   } catch (err) {
-    res.status(400).json("Error: " + err);
+    res.status(400).json({ message: "Error: " + err });
   }
 };
 
