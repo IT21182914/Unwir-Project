@@ -26,6 +26,8 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
 
   return (
     <div>
+      <br />
+      <br />
       <div className="max-w-sm mx-auto p-6 bg-violet-50 border border-black rounded-lg shadow-lg hover:bg-blue-100 transition duration-300 ease-in-out transform hover:-translate-y-1">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
           {title}
@@ -54,7 +56,17 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
         className="modal-container"
       >
         <div className="modal-content">
-          <h2>Edit Note</h2>
+          <h1
+            style={{
+              textAlign: "center",
+              fontSize: "24px",
+              fontWeight: "bold",
+              color: "#333",
+            }}
+          >
+            Edit Note
+          </h1>
+
           <input
             type="text"
             value={updatedTitle}
@@ -84,6 +96,8 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
           </div>
         </div>
       </Modal>
+      <br />
+      <br />
     </div>
   );
 };

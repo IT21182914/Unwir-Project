@@ -40,7 +40,7 @@
 }
 
 .modal-content button.cancel:hover {
-    background-color: #00f190;
+    background-color: #ebebeb;
     /* Darker red on hover */
 }
 .modal-content button {
