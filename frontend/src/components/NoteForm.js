@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const NoteForm = () => {
-  const navigate = useNavigate(); // Access the navigate function
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -27,7 +27,6 @@ const NoteForm = () => {
         content: "",
       });
 
-      // Redirect to '/cards' after successful form submission
       navigate("/cards");
     } catch (error) {
       console.error("Error creating note:", error);

@@ -18,7 +18,6 @@ const NoteList = () => {
   }, []);
 
   const handleUpdateNote = () => {
-    // Logic to update notes
     console.log("Note updated!");
   };
 
@@ -27,10 +26,10 @@ const NoteList = () => {
       {notes.map((note, index) => (
         <NoteCard
           key={index}
-          id={note._id} // Assuming there's an '_id' field in your note object
+          id={note._id}
           title={note.title}
           content={note.content}
-          onUpdate={handleUpdateNote} // Pass the onUpdate function here
+          onUpdate={handleUpdateNote}
         />
       ))}
     </div>

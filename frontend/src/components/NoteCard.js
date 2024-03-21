@@ -8,6 +8,9 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [updatedTitle, setUpdatedTitle] = useState(title);
   const [updatedContent, setUpdatedContent] = useState(content);
+  const [successAlert, setSuccessAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [deleteSuccessAlert, setDeleteSuccessAlert] = useState(false);
 
   const handleUpdate = async () => {
     try {
@@ -15,32 +18,81 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
         title: updatedTitle,
         content: updatedContent,
       });
-      alert("Note updated successfully!");
-      onUpdate(); // Trigger a reload of notes after update
+      onUpdate();
       setUpdateModalIsOpen(false);
       window.location.reload();
+
+      setSuccessAlert(true);
+
+      setTimeout(() => {
+        setSuccessAlert(false);
+      }, 3000);
     } catch (error) {
       console.error("Error updating note:", error);
-      alert("An error occurred while updating the note. Please try again.");
+      setErrorAlert(true);
     }
   };
 
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8080/notes/${id}`);
-
-      onDelete(); // Trigger a reload of notes after deletion
+      onDelete();
       setDeleteModalIsOpen(false);
+
+      setDeleteSuccessAlert(true);
+
+      setTimeout(() => {
+        setDeleteSuccessAlert(false);
+        window.location.reload();
+      }, 3000);
     } catch (error) {
       console.error("Error deleting note:", error);
+      setErrorAlert(true);
       window.location.reload();
     }
   };
 
   return (
     <div>
+      <div className="text-center">
+        {successAlert && (
+          <div
+            className="mx-auto p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:text-green-600"
+            role="alert"
+          >
+            <span className="font-medium">Success alert!</span> Successfully
+            updated the note.
+          </div>
+        )}
+      </div>
+
+      <div className="text-center">
+        {errorAlert && (
+          <div
+            class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:text-red-600"
+            role="alert"
+          >
+            <span class="font-medium">Danger alert!</span> Change a few things
+            up and try submitting again.
+          </div>
+        )}
+      </div>
+
+      <div className="text-center">
+        {deleteSuccessAlert && (
+          <div
+            class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:text-red-600"
+            role="alert"
+          >
+            <span class="font-medium">Danger alert!</span> You have successfully
+            deleted the note.
+          </div>
+        )}
+      </div>
+
       <br />
       <br />
+
       <div className="max-w-sm mx-auto p-6 bg-violet-50 border border-black rounded-lg shadow-lg hover:bg-blue-100 transition duration-300 ease-in-out transform hover:-translate-y-1">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
           {title}
@@ -101,7 +153,7 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
             </button>
             <button
               onClick={() => setUpdateModalIsOpen(false)}
-              className="px-4 py-2 font-semibold rounded hover:bg-gray-300 transition duration-300 ease-in-out cancel" // Add 'cancel' class here
+              className="px-4 py-2 font-semibold rounded hover:bg-gray-300 transition duration-300 ease-in-out cancel"
             >
               Cancel
             </button>
