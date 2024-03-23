@@ -8,7 +8,9 @@ const NoteList = () => {
   useEffect(() => {
     async function fetchNotes() {
       try {
-        const response = await axios.get("http://localhost:8080/notes");
+        const response = await axios.get(
+          "https://unwir-project-0joa.onrender.com/notes"
+        );
         setNotes(response.data);
       } catch (error) {
         console.error("Error fetching notes:", error);
@@ -30,7 +32,7 @@ const NoteList = () => {
 
   const handleDeleteNote = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/notes/${id}`);
+      await axios.delete(`https://unwir-project-0joa.onrender.com/notes/${id}`);
       setNotes(notes.filter((note) => note._id !== id));
     } catch (error) {
       console.error("Error deleting note:", error);
