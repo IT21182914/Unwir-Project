@@ -41,12 +41,12 @@ const NoteForm = () => {
   };
   return (
     <div
-    // style={{
-    //   backgroundImage: `url(https://cdn.pixabay.com/photo/2018/04/07/08/28/notepad-3297994_1280.jpg)`,
-    //   backgroundSize: "auto",
-    //   backgroundPosition: "center",
-    //   minHeight: "100vh",
-    // }}
+      style={{
+        backgroundImage: `url(https://cdn.pixabay.com/photo/2018/04/07/08/28/notepad-3297994_1280.jpg)`,
+        backgroundSize: "auto",
+        backgroundPosition: "-38% center",
+        minHeight: "100vh",
+      }}
     >
       <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
         <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -100,7 +100,7 @@ const NoteForm = () => {
       <div className="text-center">
         <button
           onClick={handleNavigate}
-          class="bg-transparent hover:bg-purple-400  text-blue-700 font-semibold hover:text-white py-6 px-8 border border-purple-400 hover:border-transparent rounded"
+          class="bg-transparent hover:bg-purple-400  text-blue-700 font-semibold hover:text-white py-6 px-8 border border-purple-300 hover:border-transparent rounded"
         >
           My Notes
         </button>

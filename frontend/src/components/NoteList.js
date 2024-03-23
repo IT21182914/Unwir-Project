@@ -40,7 +40,14 @@ const NoteList = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+    <div
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3"
+      style={{
+        backgroundImage: `url(https://cdn.pixabay.com/photo/2016/01/09/18/28/notepad-1130743_1280.jpg)`,
+        backgroundSize: "cover",
+        minHeight: "100vh",
+      }}
+    >
       {notes.map((note, index) => (
         <NoteCard
           key={index}
