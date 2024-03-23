@@ -37,7 +37,14 @@ const NoteForm = () => {
     navigate("/cards");
   };
   return (
-    <div>
+    <div
+    // style={{
+    //   backgroundImage: `url(https://cdn.pixabay.com/photo/2018/04/07/08/28/notepad-3297994_1280.jpg)`,
+    //   backgroundSize: "auto",
+    //   backgroundPosition: "center",
+    //   minHeight: "100vh",
+    // }}
+    >
       <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
         <br /> <br /> <br /> <br /> <br /> <br /> <br />
         <h1 className="text-2xl font-semibold text-center mb-5">
@@ -55,7 +62,7 @@ const NoteForm = () => {
           />
           <label
             htmlFor="title"
-            className="absolute text-sm text-gray-500 dark:text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-start-0 rtl:peer-translate-x-1/4 text-blue-600 dark:text-blue-500"
+            className="absolute text-sm text--500 dark:text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-start-0 rtl:peer-translate-x-1/4 text-blue-600 dark:text-blue-500"
           >
             Title
           </label>
