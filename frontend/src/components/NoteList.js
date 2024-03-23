@@ -30,6 +30,15 @@ const NoteList = () => {
     );
   };
 
+  const handleDeleteNote = async (id) => {
+    try {
+      await axios.delete(`https://unwir-project-0joa.onrender.com/notes/${id}`);
+      setNotes(notes.filter((note) => note._id !== id));
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
       {notes.map((note, index) => (
@@ -39,6 +48,7 @@ const NoteList = () => {
           title={note.title}
           content={note.content}
           onUpdate={handleUpdateNote}
+          onDelete={handleDeleteNote}
         />
       ))}
     </div>
