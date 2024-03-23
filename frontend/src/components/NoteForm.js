@@ -20,10 +20,7 @@ const NoteForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        "https://unwir-project-0joa.onrender.com/notes/add",
-        formData
-      );
+      await axios.post("http://localhost:8080/notes/add", formData);
 
       setFormData({
         title: "",

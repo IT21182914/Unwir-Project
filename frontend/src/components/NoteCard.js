@@ -14,13 +14,10 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(
-        `https://unwir-project-0joa.onrender.com/notes/update/${id}`,
-        {
-          title: updatedTitle,
-          content: updatedContent,
-        }
-      );
+      await axios.put(`http://localhost:8080/notes/update/${id}`, {
+        title: updatedTitle,
+        content: updatedContent,
+      });
       onUpdate(id, updatedTitle, updatedContent);
       setUpdateModalIsOpen(false);
       setSuccessAlert(true);
@@ -36,7 +33,7 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://unwir-project-0joa.onrender.com/notes/${id}`);
+      await axios.delete(`http://localhost:8080/notes/${id}`);
       onDelete(id);
       setDeleteModalIsOpen(false);
       setDeleteSuccessAlert(true);
