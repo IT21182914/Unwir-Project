@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,24 @@ const NoteForm = () => {
     title: "",
     content: "",
   });
+  const [existingTitles, setExistingTitles] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    async function fetchExistingNotes() {
+      try {
+        const response = await axios.get(
+          "https://unwir-project-0joa.onrender.com/notes"
+        );
+        const titles = response.data.map((note) => note.title);
+        setExistingTitles(titles);
+      } catch (error) {
+        console.error("Error fetching existing notes:", error);
+      }
+    }
+
+    fetchExistingNotes();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +37,11 @@ const NoteForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (existingTitles.includes(formData.title)) {
+      setErrorMessage("Please ensure to add a unique title.");
+      return;
+    }
+
     try {
       await axios.post(
         "https://unwir-project-0joa.onrender.com/notes/add",
@@ -39,6 +62,7 @@ const NoteForm = () => {
   const handleNavigate = () => {
     navigate("/cards");
   };
+
   return (
     <div
       style={{
@@ -65,10 +89,13 @@ const NoteForm = () => {
           />
           <label
             htmlFor="title"
-            className="absolute text-sm text--500 dark:text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-start-0 rtl:peer-translate-x-1/4 text-blue-600 dark:text-blue-500"
+            className="absolute text-lg text--500 dark:text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-start-0 rtl:peer-translate-x-1/4 text-blue-600 dark:text-blue-500"
           >
             Title
           </label>
+          {errorMessage && (
+            <p className="text-red-500 text-sm mb-3">{errorMessage}</p>
+          )}
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <textarea
@@ -81,7 +108,7 @@ const NoteForm = () => {
           ></textarea>
           <label
             htmlFor="content"
-            className="absolute text-sm text-gray-500 dark:text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-start-0 rtl:peer-translate-x-1/4 text-blue-600 dark:text-blue-500"
+            className="absolute text-lg text-gray-500 dark:text-gray-400 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-start-0 rtl:peer-translate-x-1/4 text-blue-600 dark:text-blue-500"
           >
             Content
           </label>
