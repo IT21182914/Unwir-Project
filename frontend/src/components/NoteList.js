@@ -8,7 +8,9 @@ const NoteList = () => {
   useEffect(() => {
     async function fetchNotes() {
       try {
-        const response = await axios.get("http://localhost:8080/notes");
+        const response = await axios.get(
+          "https://unwir-project-0joa.onrender.com/notes"
+        );
         setNotes(response.data);
       } catch (error) {
         console.error("Error fetching notes:", error);
@@ -17,8 +19,15 @@ const NoteList = () => {
     fetchNotes();
   }, []);
 
-  const handleUpdateNote = () => {
-    console.log("Note updated!");
+  const handleUpdateNote = (id, updatedTitle, updatedContent) => {
+    // Update the state with the updated note
+    setNotes(
+      notes.map((note) =>
+        note._id === id
+          ? { ...note, title: updatedTitle, content: updatedContent }
+          : note
+      )
+    );
   };
 
   return (

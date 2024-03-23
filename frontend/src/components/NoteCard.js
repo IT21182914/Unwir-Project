@@ -14,14 +14,15 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:8080/notes/update/${id}`, {
-        title: updatedTitle,
-        content: updatedContent,
-      });
-      onUpdate();
+      await axios.put(
+        `https://unwir-project-0joa.onrender.com/notes/update/${id}`,
+        {
+          title: updatedTitle,
+          content: updatedContent,
+        }
+      );
+      onUpdate(id, updatedTitle, updatedContent);
       setUpdateModalIsOpen(false);
-      window.location.reload();
-
       setSuccessAlert(true);
 
       setTimeout(() => {
@@ -35,20 +36,17 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/notes/${id}`);
-      onDelete();
+      await axios.delete(`https://unwir-project-0joa.onrender.com/notes/${id}`);
+      onDelete(id);
       setDeleteModalIsOpen(false);
-
       setDeleteSuccessAlert(true);
 
       setTimeout(() => {
         setDeleteSuccessAlert(false);
-        window.location.reload();
-      }, 3000);
+      }, 1000);
     } catch (error) {
       console.error("Error deleting note:", error);
       setErrorAlert(true);
-      window.location.reload();
     }
   };
 
