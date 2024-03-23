@@ -40,7 +40,7 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
 
       setTimeout(() => {
         setDeleteSuccessAlert(false);
-      }, 1000);
+      }, 2000);
     } catch (error) {
       console.error("Error deleting note:", error);
       setErrorAlert(true);
