@@ -166,6 +166,7 @@ const NoteCard = ({ id, title, content, onUpdate, onDelete }) => {
       >
         <div className="w-full max-w-md bg-white shadow-lg rounded-md p-6 relative">
           <svg
+            onClick={() => setDeleteModalIsOpen(false)}
             xmlns="http://www.w3.org/2000/svg"
             className="w-3.5 cursor-pointer shrink-0 fill-black hover:fill-red-500 float-right"
             viewBox="0 0 320.591 320.591"
